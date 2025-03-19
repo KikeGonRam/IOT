@@ -634,7 +634,13 @@
                             <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                             <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
                             <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                            <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                            <option value="150" {{ request('per_page') == 150 ? 'selected' : '' }}>150</option>
+                            <option value="200" {{ request('per_page') == 200 ? 'selected' : '' }}>200</option>
+                            <option value="500" {{ request('per_page') == 500 ? 'selected' : '' }}>500</option>
+                            <option value="1000" {{ request('per_page') == 1000 ? 'selected' : '' }}>1000</option>
                         </select>
+
                     </div>
                 </div>
             </form>

@@ -25,7 +25,6 @@
             position: relative;
         }
 
-        /* Fondo animado */
         .background-animation {
             position: absolute;
             top: 0;
@@ -33,7 +32,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-color: #c3cfe2; /* Fallback color */
+            background-color: #c3cfe2;
             background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
             animation: fadeInOut 15s infinite ease-in-out;
         }
@@ -67,7 +66,6 @@
             font-weight: 600;
         }
 
-        /* Estilos mejorados para campos de formulario */
         .input-group {
             position: relative;
             margin-bottom: 1.5rem;
@@ -157,7 +155,6 @@
             border-color: #28a745;
         }
 
-        /* Botón de inicio de sesión */
         .btn-login {
             width: 100%;
             padding: 12px;
@@ -190,16 +187,10 @@
             margin-right: 8px;
         }
 
-        /* Recordar sesión */
         .remember-check {
             margin-bottom: 1rem;
         }
 
-        .remember-check input {
-            margin-right: 8px;
-        }
-
-        /* Enlaces */
         .login-links {
             display: flex;
             justify-content: space-between;
@@ -219,7 +210,6 @@
             color: #0056b3;
         }
 
-        /* Spinner de carga */
         .spinner {
             display: none;
             margin-right: 8px;
@@ -231,7 +221,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Notificaciones */
         .notification {
             position: fixed;
             top: 20px;
@@ -257,7 +246,6 @@
             border-left: 4px solid #dc3545;
         }
 
-        /* Alerta de error */
         #errorContainer {
             margin-bottom: 1.5rem;
         }
@@ -271,6 +259,14 @@
         <!-- Contenedor para alertas del backend -->
         <div id="errorContainer" class="alert alert-danger text-center" style="display: none;" role="alert" aria-live="assertive">
             <span id="errorMessage"></span>
+        </div>
+
+        <!-- Contador de intentos y temporizador -->
+        <div id="attemptsContainer" class="text-center mb-3">
+            <p>Intentos restantes: <span id="remainingAttempts">3</span></p>
+            <div id="suspensionTimer" class="alert alert-warning" style="display: none;">
+                Cuenta suspendida. Tiempo restante: <span id="timerCountdown"></span>
+            </div>
         </div>
         
         <form id="loginForm" method="POST" action="{{ route('user.login.submit') }}" novalidate>
@@ -334,23 +330,97 @@
             const errorContainer = document.getElementById('errorContainer');
             const errorMessage = document.getElementById('errorMessage');
             const notification = document.getElementById('notification');
-            
+            const attemptsContainer = document.getElementById('attemptsContainer');
+            const remainingAttempts = document.getElementById('remainingAttempts');
+            const suspensionTimer = document.getElementById('suspensionTimer');
+            const timerCountdown = document.getElementById('timerCountdown');
+
+            // Variables de control
+            let loginAttempts = parseInt(localStorage.getItem('loginAttempts')) || 3;
+            let suspensionEnd = parseInt(localStorage.getItem('suspensionEnd')) || 0;
+            let isSuspended = false;
+
+            // Actualizar contador inicial
+            remainingAttempts.textContent = loginAttempts;
+
             // Mostrar notificación
             function showNotification(message, type) {
                 notification.textContent = message;
                 notification.className = 'notification ' + type;
                 notification.classList.add('show');
-                
                 setTimeout(() => {
                     notification.classList.remove('show');
                 }, 5000);
             }
-            
+
+            // Formatear tiempo
+            function formatTime(seconds) {
+                let mins = Math.floor(seconds / 60);
+                let secs = seconds % 60;
+                return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+
+            // Verificar suspensión
+            function checkSuspension() {
+                const now = Date.now();
+                if (suspensionEnd > now) {
+                    isSuspended = true;
+                    submitButton.disabled = true;
+                    suspensionTimer.style.display = 'block';
+                    startTimer(suspensionEnd - now);
+                } else if (suspensionEnd !== 0) {
+                    resetSuspension();
+                }
+            }
+
+            // Iniciar temporizador
+            function startTimer(milliseconds) {
+                let remainingSeconds = Math.ceil(milliseconds / 1000);
+                const timer = setInterval(() => {
+                    remainingSeconds--;
+                    timerCountdown.textContent = formatTime(remainingSeconds);
+                    if (remainingSeconds <= 0) {
+                        clearInterval(timer);
+                        resetSuspension();
+                    }
+                }, 1000);
+                timerCountdown.textContent = formatTime(remainingSeconds);
+            }
+
+            // Resetear suspensión
+            function resetSuspension() {
+                isSuspended = false;
+                loginAttempts = 3;
+                localStorage.setItem('loginAttempts', loginAttempts);
+                localStorage.setItem('suspensionEnd', 0);
+                remainingAttempts.textContent = loginAttempts;
+                suspensionTimer.style.display = 'none';
+                submitButton.disabled = false;
+            }
+
+            // Manejar intento fallido
+            function handleFailedAttempt() {
+                loginAttempts--;
+                localStorage.setItem('loginAttempts', loginAttempts);
+                remainingAttempts.textContent = loginAttempts;
+
+                if (loginAttempts <= 0) {
+                    suspensionEnd = Date.now() + 300000; // 5 minutos
+                    localStorage.setItem('suspensionEnd', suspensionEnd);
+                    isSuspended = true;
+                    submitButton.disabled = true;
+                    suspensionTimer.style.display = 'block';
+                    showNotification('Demasiados intentos fallidos. Cuenta suspendida por 5 minutos.', 'error');
+                    startTimer(300000);
+                } else {
+                    showNotification(`Inicio de sesión fallido. Te quedan ${loginAttempts} intentos.`, 'error');
+                }
+            }
+
             // Validación en tiempo real
             function validateForm() {
                 let isValid = true;
                 
-                // Validar email
                 if (!emailInput.value.trim()) {
                     emailGroup.classList.add('error');
                     emailError.textContent = 'Este campo es obligatorio';
@@ -367,7 +437,6 @@
                     emailError.style.display = 'none';
                 }
                 
-                // Validar contraseña
                 if (!passwordInput.value) {
                     passwordGroup.classList.add('error');
                     passwordError.textContent = 'Este campo es obligatorio';
@@ -384,16 +453,14 @@
                     passwordError.style.display = 'none';
                 }
                 
-                // Habilitar/deshabilitar botón de envío
-                submitButton.disabled = !isValid;
+                submitButton.disabled = !isValid || isSuspended;
                 return isValid;
             }
-            
-            // Eventos de validación
+
+            // Eventos
             emailInput.addEventListener('input', validateForm);
             passwordInput.addEventListener('input', validateForm);
-            
-            // Mostrar/Ocultar contraseña
+
             togglePassword.addEventListener('click', function() {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
@@ -402,44 +469,49 @@
                 togglePassword.setAttribute('aria-label', 
                     type === 'password' ? 'Mostrar contraseña' : 'Ocultar contraseña');
             });
-            
-            // Accesibilidad para toggle password con teclado
+
             togglePassword.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     this.click();
                 }
             });
-            
-            // Envío del formulario
+
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                if (!validateForm()) {
+                if (!validateForm() || isSuspended) {
                     return;
                 }
-                
-                // Mostrar spinner y deshabilitar botón
+
                 loginSpinner.style.display = 'inline-block';
                 submitButton.disabled = true;
                 submitButton.innerHTML = '<span class="spinner"><i class="fas fa-spinner"></i></span> Procesando...';
-                
-                // Simulación de envío del formulario (reemplazar con AJAX real)
-                setTimeout(function() {
-                    // En un caso real, aquí irían las llamadas AJAX
+
+                // Simulación de AJAX (reemplazar con llamada real)
+                setTimeout(() => {
+                    const loginSuccess = false; // Cambiar según respuesta real
+                    
                     loginSpinner.style.display = 'none';
-                    submitButton.disabled = false;
                     submitButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Ingresar';
-                    
-                    // Ejemplo de respuesta exitosa
-                    showNotification('Cargando...');
-                    
-                    // Enviar el formulario realmente después de la simulación
-                    loginForm.submit();
+
+                    if (loginSuccess) {
+                        showNotification('Inicio de sesión exitoso', 'success');
+                        loginAttempts = 3;
+                        localStorage.setItem('loginAttempts', loginAttempts);
+                        remainingAttempts.textContent = loginAttempts;
+                        loginForm.submit();
+                    } else {
+                        handleFailedAttempt();
+                        submitButton.disabled = false;
+                    }
                 }, 1500);
             });
-            
-            // Si hay errores enviados desde el servidor (Laravel)
+
+            // Verificar suspensión al cargar
+            checkSuspension();
+
+            // Errores del servidor
             @if ($errors->has('email'))
                 errorMessage.textContent = "{{ $errors->first('email') }}";
                 errorContainer.style.display = 'block';
