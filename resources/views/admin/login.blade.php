@@ -199,6 +199,43 @@
                 padding: 0.5rem;
             }
         }
+<<<<<<< HEAD
+=======
+        /* Contenedor del botón */
+         .btn-container {
+           display: flex;
+           justify-content: center;
+           margin-bottom: 1.5rem;
+        }
+
+        /* Estilos del botón */
+        .btn-custom {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+       }
+
+    /* Espaciado del ícono */
+       .btn-custom i {
+        margin-right: 10px;
+    }
+
+     /* Efecto al pasar el mouse */
+       .btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #218838, #1e7e34);
+     }
+
+>>>>>>> 468d358 (semafos2)
     </style>
 </head>
 <body>
@@ -239,7 +276,18 @@
                 <i class="fas fa-sign-in-alt"></i>
                 Iniciar Sesión
             </button>
+<<<<<<< HEAD
         </form>
+=======
+
+            <div class="btn-container">
+               <a href="{{ url('/') }}" class="btn-custom">
+                  <i class="fas fa-arrow-left"></i> Regresar a la Página de Inicio
+               </a>
+            </div>
+        </form>
+
+>>>>>>> 468d358 (semafos2)
     </div>
 
     <script>

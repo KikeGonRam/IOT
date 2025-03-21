@@ -141,6 +141,7 @@
         .login-links a:hover {
             color: #0056b3;
         }
+<<<<<<< HEAD
     </style>
 </head>
 <body>
@@ -242,5 +243,262 @@
             });
         });
     </script>
+=======
+        /* Contenedor del botón */
+       .btn-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+       }
+
+       /* Estilos del botón */
+    .btn-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Hace que el botón tenga el mismo ancho que el de "Registrarse" */
+    max-width: 900px; /* Ajusta el ancho máximo para que no sea demasiado grande */
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    padding: 14px 0; /* Ajustado para que coincida con la altura del otro botón */
+    border-radius: 8px;
+    font-size: 18px; /* Aumentado para coincidir con el tamaño del texto */
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+     }
+
+      /* Espaciado del ícono */
+      .btn-custom i {
+    margin-right: 50px;
+    font-size: 20px; /* Asegura que el icono sea del tamaño adecuado */
+      }
+
+    /* Efecto al pasar el mouse */
+    .btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #218838, #1e7e34);
+    }
+
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>Registro de Usuario</h2>
+    <form method="POST" action="{{ route('user.register.submit') }}" id="registerForm">
+        @csrf
+        <div class="row">
+            <!-- Columna Izquierda -->
+            <div class="col">
+                <!-- Nombre -->
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+                    <i class="fas fa-check validation-indicator"></i>
+                    <span class="error-message" id="nombreError"></span>
+                    <small class="form-text text-muted">Solo letras y espacios.</small>
+                </div>
+                <!-- Apellido Paterno -->
+                <div class="input-group">
+                    <i class="fas fa-id-card"></i>
+                    <input type="text" name="app" id="app" placeholder="Apellido Paterno" required>
+                    <i class="fas fa-check validation-indicator"></i>
+                    <span class="error-message" id="appError"></span>
+                    <small class="form-text text-muted">Solo letras y espacios.</small>
+                </div>
+                <!-- Apellido Materno -->
+                <div class="input-group">
+                    <i class="fas fa-id-card"></i>
+                    <input type="text" name="apm" id="apm" placeholder="Apellido Materno" required>
+                    <i class="fas fa-check validation-indicator"></i>
+                    <span class="error-message" id="apmError"></span>
+                    <small class="form-text text-muted">Solo letras y espacios.</small>
+                </div>
+                <!-- Fecha de Nacimiento -->
+                <div class="input-group">
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type="date" name="fn" required>
+                    <i class="fas fa-check validation-indicator"></i>
+                </div>
+            </div>
+            <!-- Columna Derecha -->
+            <div class="col">
+                <!-- Teléfono -->
+                <div class="input-group">
+                    <i class="fas fa-phone"></i>
+                    <input type="text" name="telefono" placeholder="Teléfono" required>
+                    <i class="fas fa-check validation-indicator"></i>
+                    <small class="form-text text-muted">Formato: 123-456-7890.</small>
+                </div>
+                <!-- Correo Electrónico -->
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" name="email" id="email" placeholder="Correo Electrónico" required>
+                    <i class="fas fa-check validation-indicator"></i>
+                    <span class="error-message" id="emailError"></span>
+                    <small class="form-text text-muted">Ejemplo: usuario@dominio.com.</small>
+                </div>
+                <!-- Contraseña -->
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" id="password" placeholder="Contraseña" required>
+                    <i class="fas fa-check validation-indicator"></i>
+                    <span class="error-message" id="passwordError"></span>
+                    <small class="form-text text-muted">1-16 caracteres, al menos una mayúscula, una minúscula, un número y un carácter especial.</small>
+                </div>
+                <!-- Confirmar Contraseña -->
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirmar Contraseña" required>
+                    <i class="fas fa-check validation-indicator"></i>
+                    <span class="error-message" id="passwordConfirmationError"></span>
+                    <small class="form-text text-muted">Las contraseñas deben coincidir.</small>
+                </div>
+            </div>
+        </div>
+        <!-- Botón de Registro -->
+        <button type="submit">
+            <i class="fas fa-user-plus"></i> Registrarse
+        </button>
+
+        <div class="btn-container">
+        <a href="{{ url('/') }}" class="btn-custom">
+        <i class="fas fa-arrow-left"></i> Regresar a la Página de Inicio
+        </a>
+        </div>
+
+
+        <!-- Enlaces adicionales -->
+        <div class="login-links">
+            <p>¿Ya tienes una cuenta? <a href="{{ route('user.login') }}" class="login-link">Iniciar sesión</a></p>
+        </div>
+
+        
+    </form>
+</div>
+
+<script>
+document.getElementById('registerForm').addEventListener('submit', function(event) {
+    let isValid = true;
+
+    // Validación de Nombres (no aceptar caracteres especiales)
+    const nombre = document.getElementById('nombre').value;
+    const nombreRegex = /^[a-zA-Z\s]+$/;
+    if (!nombreRegex.test(nombre)) {
+        document.getElementById('nombreError').textContent = 'El nombre no puede contener caracteres especiales.';
+        isValid = false;
+    } else {
+        document.getElementById('nombreError').textContent = '';
+    }
+
+    // Validación de Apellidos (no aceptar caracteres especiales)
+    const app = document.getElementById('app').value;
+    const apm = document.getElementById('apm').value;
+    if (!nombreRegex.test(app)) {
+        document.getElementById('appError').textContent = 'El apellido paterno no puede contener caracteres especiales.';
+        isValid = false;
+    } else {
+        document.getElementById('appError').textContent = '';
+    }
+    if (!nombreRegex.test(apm)) {
+        document.getElementById('apmError').textContent = 'El apellido materno no puede contener caracteres especiales.';
+        isValid = false;
+    } else {
+        document.getElementById('apmError').textContent = '';
+    }
+
+    // Validación de Correo Electrónico
+    const email = document.getElementById('email').value;
+    const emailRegex = /^[a-zA-Z][a-zA-Z0-9-._]*@[a-zA-Z0-9-._]+\.[a-zA-Z]{2,3}$/;
+    if (!emailRegex.test(email)) {
+        document.getElementById('emailError').textContent = 'El correo electrónico no es válido.';
+        isValid = false;
+    } else {
+        document.getElementById('emailError').textContent = '';
+    }
+
+    // Validación de Contraseña
+    const password = document.getElementById('password').value;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{1,16}$/;
+    if (!passwordRegex.test(password)) {
+        document.getElementById('passwordError').textContent = 'Contraseña no valida';
+        isValid = false;
+    } else {
+        document.getElementById('passwordError').textContent = '';
+    }
+
+    // Validación de Confirmación de Contraseña
+    const passwordConfirmation = document.getElementById('password_confirmation').value;
+    if (password !== passwordConfirmation) {
+        document.getElementById('passwordConfirmationError').textContent = 'Las contraseñas no coinciden.';
+        isValid = false;
+    } else {
+        document.getElementById('passwordConfirmationError').textContent = '';
+    }
+
+    if (!isValid) {
+        event.preventDefault();
+    }
+});
+
+// Validaciones en tiempo real
+document.getElementById('nombre').addEventListener('input', function() {
+    const nombreRegex = /^[a-zA-Z\s]+$/;
+    if (!nombreRegex.test(this.value)) {
+        document.getElementById('nombreError').textContent = 'El nombre no puede contener caracteres especiales.';
+    } else {
+        document.getElementById('nombreError').textContent = '';
+    }
+});
+
+document.getElementById('app').addEventListener('input', function() {
+    const nombreRegex = /^[a-zA-Z\s]+$/;
+    if (!nombreRegex.test(this.value)) {
+        document.getElementById('appError').textContent = 'El apellido paterno no puede contener caracteres especiales.';
+    } else {
+        document.getElementById('appError').textContent = '';
+    }
+});
+
+document.getElementById('apm').addEventListener('input', function() {
+    const nombreRegex = /^[a-zA-Z\s]+$/;
+    if (!nombreRegex.test(this.value)) {
+        document.getElementById('apmError').textContent = 'El apellido materno no puede contener caracteres especiales.';
+    } else {
+        document.getElementById('apmError').textContent = '';
+    }
+});
+
+document.getElementById('email').addEventListener('input', function() {
+    const emailRegex = /^[a-zA-Z][a-zA-Z0-9-._]*@[a-zA-Z0-9-._]+\.[a-zA-Z]{2,3}$/;
+    if (!emailRegex.test(this.value)) {
+        document.getElementById('emailError').textContent = 'El correo electrónico no es válido.';
+    } else {
+        document.getElementById('emailError').textContent = '';
+    }
+});
+
+document.getElementById('password').addEventListener('input', function() {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{1,16}$/;
+    if (!passwordRegex.test(this.value)) {
+        document.getElementById('passwordError').textContent = 'Contraseña no valida';
+    } else {
+        document.getElementById('passwordError').textContent = '';
+    }
+});
+
+document.getElementById('password_confirmation').addEventListener('input', function() {
+    const password = document.getElementById('password').value;
+    if (this.value !== password) {
+        document.getElementById('passwordConfirmationError').textContent = 'Las contraseñas no coinciden.';
+    } else {
+        document.getElementById('passwordConfirmationError').textContent = '';
+    }
+});
+</script>
+
+>>>>>>> 468d358 (semafos2)
 </body>
 </html>

@@ -484,10 +484,8 @@
         .users-table tr:nth-child(3) { animation-delay: 0.3s; }
         .users-table tr:nth-child(4) { animation-delay: 0.4s; }
         .users-table tr:nth-child(5) { animation-delay: 0.5s; }
-<<<<<<< HEAD
-=======
 
-              /* Contenedor del botón */
+         /* Contenedor del botón */
        .btn-download-container {
        text-align: right;
        margin-bottom: 1rem;
@@ -528,7 +526,6 @@
     .btn-download:active {
     transform: scale(0.95);
     }
->>>>>>> 468d358 (semafos2)
     </style>
 </head>
 <body>
@@ -541,13 +538,10 @@
             <ul class="sidebar-nav">
                 <li><a href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                 <li><a href="{{ route('admin.users.index') }}" class="active"><i class="fas fa-users"></i><span>Usuarios</span></a></li>
-<<<<<<< HEAD
-=======
                 <li><a href="{{ route('sensor.registro_sensor') }}" class="active"><i class="fas fa-users"></i><span>Registro Sensor Precensia</span></a></li>
                 <li><a href="{{ route('semaforo1.registro_semaforo1') }}" class="active"><i class="fas fa-users"></i><span>Registro Semaforo Vehiculos1</span></a></li>
                 <li><a href="{{ route('semaforo2.registro_semaforo2') }}" class="active"><i class="fas fa-users"></i><span>Registro Semaforo Vehiculos2</span></a></li>
                 <li><a href="{{ route('estudiantes.registro_estudiantes') }}" class="active"><i class="fas fa-users"></i><span>Registro Semaforo Estudiantes</span></a></li>
->>>>>>> 468d358 (semafos2)
                 <li><a href="#"><i class="fas fa-chart-bar"></i><span>Estadísticas</span></a></li>
                 <li><a href="#"><i class="fas fa-cog"></i><span>Configuración</span></a></li>
             </ul>
@@ -564,22 +558,18 @@
                 </button>
             </form>
         </div>
-<<<<<<< HEAD
 
-=======
-       
->>>>>>> 468d358 (semafos2)
         <section class="content fade-in">
             <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
-                <a href="{{ route('admin.users.create') }}" class="btn-custom btn-success">
-                    <i class="fas fa-user-plus"></i> Nuevo Usuario
+                <a href="{{ route('sensor.sensor_login') }}" class="btn-custom btn-success">
+                    <i class="fas fa-plus"></i> Nuevo Registro Sensores
                 </a>
-                <button class="btn-custom btn-primary tooltip" data-tooltip="Ver estadísticas de usuarios">
+                <button class="btn-custom btn-primary tooltip" data-tooltip="Ver estadísticas de sensores">
                     <i class="fas fa-chart-pie"></i> Estadísticas
                 </button>
             </div>
 
-            <h2 style="margin-bottom: 1.5rem;"><i class="fas fa-list-ul"></i> Lista de Usuarios</h2>
+            <h2 style="margin-bottom: 1.5rem;"><i class="fas fa-list-ul"></i> Lista de Sensores</h2>
 
             @if(session('success'))
                 <div class="alert alert-success">
@@ -587,131 +577,68 @@
                 </div>
             @endif
 
-            <form method="GET" action="{{ route('admin.users.index') }}">
+            <form method="GET" action="{{ route('sensor.registro_sensor') }}">
                 <div class="table-controls">
                     <div class="search-container">
                         <i class="fas fa-search"></i>
-                        <input type="text" name="search" id="userSearch" placeholder="Buscar usuario..." class="search-input" value="{{ request('search') }}">
+                        <input type="text" name="search" id="sensorSearch" placeholder="Buscar sensor..." class="search-input" value="{{ request('search') }}">
                     </div>
                     <div class="table-actions">
                         <button type="submit" class="btn-custom btn-primary btn-sm tooltip" data-tooltip="Buscar">
                             <i class="fas fa-search"></i> Buscar
                         </button>
-<<<<<<< HEAD
-                        <button type="button" class="btn-custom btn-primary btn-sm tooltip" data-tooltip="Exportar datos">
-                            <i class="fas fa-file-export"></i> Exportar
-                            
-                        </button>
                     </div>
                 </div>
-=======
-                        <a href="importar-usuarios" class="btn-custom btn-primary btn-sm tooltip" data-tooltip="Importar datos">
-                         <i class="fas fa-file-export"></i> Importar
-                        </a>
 
-                    </div>
-                </div>
-              <div class="table-controls">
                 <div class="btn-download-container">
                     <button id="downloadPdfBtn" class="btn-download">
                     <i class="fas fa-download"></i> Descargar PDF </button>
                   </div>
 
-                  <div class="btn-download-container">
-                    <button id="downloadExcelBtn" class="btn-download">
-                    <i class="fas fa-download"></i> Descargar Excel </button>
-                  </div>
-              </div>
->>>>>>> 468d358 (semafos2)
-
                 <div class="table-container">
                     <table class="users-table">
-                    <thead>
-<<<<<<< HEAD
-    <tr>
-=======
-                  <tr>
->>>>>>> 468d358 (semafos2)
-        <th class="sortable">
-            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'id_usuario', 'sort_direction' => request('sort_direction', 'asc') == 'asc' ? 'desc' : 'asc']) }}">
-                <i class="fas fa-hashtag"></i> ID 
-                <i class="fas {{ request('sort_by', 'id_usuario') == 'id_usuario' && request('sort_direction', 'asc') == 'asc' ? 'fa-sort-up' : (request('sort_by') == 'id_usuario' && request('sort_direction') == 'desc' ? 'fa-sort-down' : 'fa-sort') }}"></i>
-            </a>
-        </th>
-        <th class="sortable">
-            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'nombre', 'sort_direction' => request('sort_direction', 'asc') == 'asc' ? 'desc' : 'asc']) }}">
-                <i class="fas fa-user"></i> Nombre 
-                <i class="fas {{ request('sort_by') == 'nombre' && request('sort_direction', 'asc') == 'asc' ? 'fa-sort-up' : (request('sort_by') == 'nombre' && request('sort_direction') == 'desc' ? 'fa-sort-down' : 'fa-sort') }}"></i>
-            </a>
-        </th>
-        <th class="sortable">
-            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'app', 'sort_direction' => request('sort_direction', 'asc') == 'asc' ? 'desc' : 'asc']) }}">
-                <i class="fas fa-user"></i> Ap. Paterno 
-                <i class="fas {{ request('sort_by') == 'app' && request('sort_direction', 'asc') == 'asc' ? 'fa-sort-up' : (request('sort_by') == 'app' && request('sort_direction') == 'desc' ? 'fa-sort-down' : 'fa-sort') }}"></i>
-            </a>
-        </th>
-        <th class="sortable">
-            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'apm', 'sort_direction' => request('sort_direction', 'asc') == 'asc' ? 'desc' : 'asc']) }}">
-                <i class="fas fa-user"></i> Ap. Materno 
-                <i class="fas {{ request('sort_by') == 'apm' && request('sort_direction', 'asc') == 'asc' ? 'fa-sort-up' : (request('sort_by') == 'apm' && request('sort_direction') == 'desc' ? 'fa-sort-down' : 'fa-sort') }}"></i>
-            </a>
-        </th>
-        <th class="sortable">
-            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'fn', 'sort_direction' => request('sort_direction', 'asc') == 'asc' ? 'desc' : 'asc']) }}">
-                <i class="fas fa-calendar"></i> Fecha Nac. 
-                <i class="fas {{ request('sort_by') == 'fn' && request('sort_direction', 'asc') == 'asc' ? 'fa-sort-up' : (request('sort_by') == 'fn' && request('sort_direction') == 'desc' ? 'fa-sort-down' : 'fa-sort') }}"></i>
-            </a>
-        </th>
-        <th><i class="fas fa-phone"></i> Teléfono</th>
-        <th><i class="fas fa-envelope"></i> Email</th>
-        <th><i class="fas fa-tools"></i> Acciones</th>
-    </tr>
-</thead>
-                        <tbody id="usersTableBody">
-                            @forelse ($users as $user)
-                                <tr class="user-row">
-                                    <td data-label="ID"><span class="badge-id">{{ $user->id_usuario }}</span></td>
-                                    <td data-label="Nombre">{{ $user->nombre }}</td>
-                                    <td data-label="Ap. Paterno">{{ $user->app }}</td>
-                                    <td data-label="Ap. Materno">{{ $user->apm }}</td>
-                                    <td data-label="Fecha Nac.">{{ $user->fn }}</td>
-                                    <td data-label="Teléfono"><a href="tel:{{ $user->telefono }}" class="phone-link"><i class="fas fa-phone-alt"></i> {{ $user->telefono }}</a></td>
-                                    <td data-label="Email"><a href="mailto:{{ $user->email }}" class="email-link"><i class="fas fa-envelope"></i> {{ $user->email }}</a></td>
+                        <thead>
+                            <tr>
+                                <th>Número de Estudiantes</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sensorsTableBody">
+                            @forelse ($Sensor as $item)
+                                <tr class="sensor-row">
+                                    <td data-label="Número de Estudiantes">{{ $item['Numero_Estudiantes'] }}</td>
+                                    <td data-label="Fecha">{{ \Carbon\Carbon::parse($item['Fecha'])->format('d/m/Y') }}</td>
+                                    <td data-label="Hora">{{ $item['Hora'] }}</td>
                                     <td>
                                         <div class="actions-container">
-                                            <a href="{{ route('admin.users.show', $user->id_usuario) }}" class="action-btn view tooltip" data-tooltip="Ver detalles">
+                                            <a href="{{ route('sensor.detalle_sensor', ['Id_sensor' => $item['Id_sensor']]) }}" class="action-btn view tooltip" data-tooltip="Ver detalles">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('admin.users.edit', $user->id_usuario) }}" class="action-btn edit tooltip" data-tooltip="Editar usuario">
+                                            <a href="{{ route('sensor.editar_sensor', ['Id_sensor' => $item['Id_sensor']]) }}" class="action-btn edit tooltip" data-tooltip="Editar sensor">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-<<<<<<< HEAD
                                             <button class="action-btn delete tooltip" 
-        data-tooltip="Eliminar usuario" 
-        onclick="showDeleteModal({{ $user->id_usuario }}, '{{ $user->nombre }}', event)">
-    <i class="fas fa-trash-alt"></i>
-</button>
-=======
-                                             <button class="action-btn delete tooltip" data-tooltip="Eliminar usuario" onclick="showDeleteModal({{ $user->id_usuario }}, '{{ $user->nombre }}', event)">
-                                             <i class="fas fa-trash-alt"></i>
+                                                data-tooltip="Eliminar sensor" 
+                                                onclick="confirmDelete(event, '{{ route('deleteSensor', ['Id_sensor' => $item['Id_sensor']]) }}')">
+                                                <i class="fas fa-trash-alt"></i>
                                             </button>
->>>>>>> 468d358 (semafos2)
                                         </div>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" style="text-align: center; padding: 2rem;">No se encontraron usuarios.</td>
+                                    <td colspan="4" style="text-align: center; padding: 2rem;">No se encontraron sensores.</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
-
                 <div class="pagination-container">
                     <div class="pagination">
                         <!-- Usar paginación de Laravel con estilos personalizados -->
-                        {!! $users->links('custom')!!}
+                        {!! $Sensor->links('custom')!!}
                     </div>
                     <div class="page-size">
                         <label>Mostrar:</label>
@@ -720,19 +647,10 @@
                             <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                             <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
                             <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
-<<<<<<< HEAD
-                            <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
-                            <option value="150" {{ request('per_page') == 150 ? 'selected' : '' }}>150</option>
-                            <option value="200" {{ request('per_page') == 200 ? 'selected' : '' }}>200</option>
-                            <option value="500" {{ request('per_page') == 500 ? 'selected' : '' }}>500</option>
-                            <option value="1000" {{ request('per_page') == 1000 ? 'selected' : '' }}>1000</option>
                         </select>
-
-=======
-                        </select>
->>>>>>> 468d358 (semafos2)
                     </div>
                 </div>
+                
             </form>
         </section>
     </main>
@@ -745,7 +663,7 @@
                 <span class="modal-close" onclick="closeDeleteModal()">×</span>
             </div>
             <div class="modal-body">
-                <p>¿Estás seguro de que deseas eliminar al usuario <span id="modalUserName"></span>?</p>
+                <p>¿Estás seguro de que deseas eliminar este sensor?</p>
                 <div class="warning-text" style="color: var(--rojo-semaforo); display: flex; align-items: center; gap: 0.5rem;">
                     <i class="fas fa-exclamation-circle"></i> Esta acción no se puede deshacer
                 </div>
@@ -762,41 +680,35 @@
     </div>
 
     <script>
-function showDeleteModal(userId, userName, event) {
-    event.preventDefault(); // Detener la acción predeterminada del botón
-    event.stopPropagation(); // Prevenir propagación del evento
-    
-    const modal = document.getElementById('deleteModal');
-    const deleteForm = document.getElementById('deleteForm');
-    const modalUserName = document.getElementById('modalUserName');
-    
-    modalUserName.textContent = userName;
-    deleteForm.action = `{{ route('admin.users.destroy', '') }}/${userId}`;
-    modal.style.display = 'flex';
-}
+        function confirmDelete(event, deleteUrl) {
+            event.preventDefault(); // Evita que el enlace se ejecute de inmediato
 
-function closeDeleteModal() {
-    document.getElementById('deleteModal').style.display = 'none';
-}
+            Swal.fire({
+                title: "¿Estás seguro?",
+                text: "Esta acción no se puede deshacer.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#28a745",  // Verde
+                cancelButtonColor: "#dc3545",  // Rojo
+                confirmButtonText: "Sí, eliminar",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = deleteUrl; // Redirige al enlace de eliminación
+                }
+            });
+        }
 
-// Manejar clic en el modal
-document.getElementById('deleteModal').addEventListener('click', function(e) {
-    if (e.target === this || e.target.classList.contains('modal-close')) {
-        closeDeleteModal();
-    }
-});
-
-// Prevenir cierre al hacer clic dentro del contenido
-document.querySelector('.modal-content').addEventListener('click', function(e) {
-    e.stopPropagation();
-});
-<<<<<<< HEAD
-
-    </script>
-=======
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+        }
     </script>
 
-       
+    <!-- Librerías -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
      <!-- Incluye la librería jsPDF y autoTable -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
@@ -810,7 +722,7 @@ document.querySelector('.modal-content').addEventListener('click', function(e) {
         pdf.setFontSize(18);
         pdf.setTextColor(33, 37, 41);
         pdf.setFont('helvetica', 'bold');
-        pdf.text('Reporte Registro de Usuarios', 14, 20);
+        pdf.text('Reporte Sensor de Presencia', 14, 20);
 
         // Obtener los datos de la tabla
         const table = document.querySelector('.users-table');
@@ -819,7 +731,7 @@ document.querySelector('.modal-content').addEventListener('click', function(e) {
 
         // Obtener los encabezados de la tabla (excluyendo la columna "Acciones")
         table.querySelectorAll('thead th').forEach((header, index) => {
-            if (index < 7) { // Solo toma las primeras 7 columnas (Número de Cambios, Fecha, Hora)
+            if (index < 3) { // Solo toma las primeras 3 columnas (Número de Cambios, Fecha, Hora)
                 headers.push(header.innerText);
             }
         });
@@ -828,7 +740,7 @@ document.querySelector('.modal-content').addEventListener('click', function(e) {
         table.querySelectorAll('tbody tr').forEach(row => {
             const rowData = [];
             row.querySelectorAll('td').forEach((cell, index) => {
-                if (index < 7) { // Solo toma las primeras 3 columnas (Número de Cambios, Fecha, Hora)
+                if (index < 3) { // Solo toma las primeras 3 columnas (Número de Cambios, Fecha, Hora)
                     rowData.push(cell.innerText);
                 }
             });
@@ -848,50 +760,9 @@ document.querySelector('.modal-content').addEventListener('click', function(e) {
         });
 
         // Descargar el PDF
-        pdf.save('Registro de Usuarios.pdf');
+        pdf.save('Semaforo Sensor de Presencia.pdf');
     });
 </script>
-
-<!-- Incluye la biblioteca xlsx -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-
-<script>
-    document.getElementById('downloadExcelBtn').addEventListener('click', function () {
-        // Obtener los datos de la tabla
-        const table = document.getElementById('usersTableBody');
-        const headers = [];
-        const rows = [];
-
-        // Obtener los encabezados de la tabla (excluyendo la columna "Acciones")
-        document.querySelectorAll('.users-table thead th').forEach((header, index) => {
-            if (index < 7) { // Solo toma las primeras 7 columnas
-                headers.push(header.innerText);
-            }
-        });
-
-        // Obtener las filas de la tabla (excluyendo la columna "Acciones")
-        table.querySelectorAll('tr').forEach(row => {
-            const rowData = [];
-            row.querySelectorAll('td').forEach((cell, index) => {
-                if (index < 7) { // Solo toma las primeras 7 columnas
-                    rowData.push(cell.innerText);
-                }
-            });
-            rows.push(rowData);
-        });
-
-        // Crear un libro de Excel y una hoja de trabajo
-        const workbook = XLSX.utils.book_new();
-        const worksheetData = [headers, ...rows];
-        const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-
-        // Añadir la hoja de trabajo al libro
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Registro de Usuarios');
-
-        // Generar el archivo Excel y descargarlo
-        XLSX.writeFile(workbook, 'Registro de Usuarios.xlsx');
-    });
-</script>
->>>>>>> 468d358 (semafos2)
 </body>
 </html>
+

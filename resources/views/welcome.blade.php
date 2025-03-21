@@ -418,10 +418,17 @@
         <section class="hero">
             <h1>Sistema de Semaforización Inteligente</h1>
             <p>Transformando el tráfico urbano con tecnología de vanguardia</p>
+<<<<<<< HEAD
             <button class="cta-button">
                 <i class="fas fa-arrow-right"></i>
                 Comenzar
             </button>
+=======
+             <a href="{{ route('user.register') }}" class="cta-button">
+               <i class="fas fa-arrow-right"></i> Comenzar
+             </a>
+
+>>>>>>> 468d358 (semafos2)
         </section>
 
         <!-- Contenedor principal del semáforo y servicios -->

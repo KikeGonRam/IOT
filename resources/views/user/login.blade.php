@@ -25,6 +25,10 @@
             position: relative;
         }
 
+<<<<<<< HEAD
+=======
+        /* Fondo animado */
+>>>>>>> 468d358 (semafos2)
         .background-animation {
             position: absolute;
             top: 0;
@@ -32,7 +36,11 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+<<<<<<< HEAD
             background-color: #c3cfe2;
+=======
+            background-color: #c3cfe2; /* Fallback color */
+>>>>>>> 468d358 (semafos2)
             background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
             animation: fadeInOut 15s infinite ease-in-out;
         }
@@ -66,6 +74,10 @@
             font-weight: 600;
         }
 
+<<<<<<< HEAD
+=======
+        /* Estilos mejorados para campos de formulario */
+>>>>>>> 468d358 (semafos2)
         .input-group {
             position: relative;
             margin-bottom: 1.5rem;
@@ -155,6 +167,10 @@
             border-color: #28a745;
         }
 
+<<<<<<< HEAD
+=======
+        /* Botón de inicio de sesión */
+>>>>>>> 468d358 (semafos2)
         .btn-login {
             width: 100%;
             padding: 12px;
@@ -187,10 +203,22 @@
             margin-right: 8px;
         }
 
+<<<<<<< HEAD
+=======
+        /* Recordar sesión */
+>>>>>>> 468d358 (semafos2)
         .remember-check {
             margin-bottom: 1rem;
         }
 
+<<<<<<< HEAD
+=======
+        .remember-check input {
+            margin-right: 8px;
+        }
+
+        /* Enlaces */
+>>>>>>> 468d358 (semafos2)
         .login-links {
             display: flex;
             justify-content: space-between;
@@ -210,6 +238,10 @@
             color: #0056b3;
         }
 
+<<<<<<< HEAD
+=======
+        /* Spinner de carga */
+>>>>>>> 468d358 (semafos2)
         .spinner {
             display: none;
             margin-right: 8px;
@@ -221,6 +253,10 @@
             100% { transform: rotate(360deg); }
         }
 
+<<<<<<< HEAD
+=======
+        /* Notificaciones */
+>>>>>>> 468d358 (semafos2)
         .notification {
             position: fixed;
             top: 20px;
@@ -246,9 +282,50 @@
             border-left: 4px solid #dc3545;
         }
 
+<<<<<<< HEAD
         #errorContainer {
             margin-bottom: 1.5rem;
         }
+=======
+        /* Alerta de error */
+        #errorContainer {
+            margin-bottom: 1.5rem;
+        }
+        /* Contenedor del botón */
+       .btn-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+        }
+
+          /* Estilos del botón */
+       .btn-custom {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+     /* Espaciado del ícono */
+       .btn-custom i {
+    margin-right: 10px;
+     }
+
+    /* Efecto al pasar el mouse */
+      .btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #218838, #1e7e34);
+    }
+
+>>>>>>> 468d358 (semafos2)
     </style>
 </head>
 <body>
@@ -260,6 +337,7 @@
         <div id="errorContainer" class="alert alert-danger text-center" style="display: none;" role="alert" aria-live="assertive">
             <span id="errorMessage"></span>
         </div>
+<<<<<<< HEAD
 
         <!-- Contador de intentos y temporizador -->
         <div id="attemptsContainer" class="text-center mb-3">
@@ -268,6 +346,8 @@
                 Cuenta suspendida. Tiempo restante: <span id="timerCountdown"></span>
             </div>
         </div>
+=======
+>>>>>>> 468d358 (semafos2)
         
         <form id="loginForm" method="POST" action="{{ route('user.login.submit') }}" novalidate>
             @csrf
@@ -302,6 +382,15 @@
                 <i class="fas fa-sign-in-alt"></i> Ingresar
             </button>
             
+<<<<<<< HEAD
+=======
+            <div class="btn-container">
+               <a href="{{ url('/') }}" class="btn-custom">
+                 <i class="fas fa-arrow-left"></i> Regresar a la Página de Inicio
+             </a>
+           </div>
+
+>>>>>>> 468d358 (semafos2)
             <!-- Enlaces adicionales -->
             <div class="login-links">
                 <p>¿No tienes una cuenta? <a href="{{ route('user.register') }}" class="register-link">Crear cuenta nueva</a></p>
@@ -330,6 +419,7 @@
             const errorContainer = document.getElementById('errorContainer');
             const errorMessage = document.getElementById('errorMessage');
             const notification = document.getElementById('notification');
+<<<<<<< HEAD
             const attemptsContainer = document.getElementById('attemptsContainer');
             const remainingAttempts = document.getElementById('remainingAttempts');
             const suspensionTimer = document.getElementById('suspensionTimer');
@@ -343,15 +433,23 @@
             // Actualizar contador inicial
             remainingAttempts.textContent = loginAttempts;
 
+=======
+            
+>>>>>>> 468d358 (semafos2)
             // Mostrar notificación
             function showNotification(message, type) {
                 notification.textContent = message;
                 notification.className = 'notification ' + type;
                 notification.classList.add('show');
+<<<<<<< HEAD
+=======
+                
+>>>>>>> 468d358 (semafos2)
                 setTimeout(() => {
                     notification.classList.remove('show');
                 }, 5000);
             }
+<<<<<<< HEAD
 
             // Formatear tiempo
             function formatTime(seconds) {
@@ -417,10 +515,17 @@
                 }
             }
 
+=======
+            
+>>>>>>> 468d358 (semafos2)
             // Validación en tiempo real
             function validateForm() {
                 let isValid = true;
                 
+<<<<<<< HEAD
+=======
+                // Validar email
+>>>>>>> 468d358 (semafos2)
                 if (!emailInput.value.trim()) {
                     emailGroup.classList.add('error');
                     emailError.textContent = 'Este campo es obligatorio';
@@ -437,6 +542,10 @@
                     emailError.style.display = 'none';
                 }
                 
+<<<<<<< HEAD
+=======
+                // Validar contraseña
+>>>>>>> 468d358 (semafos2)
                 if (!passwordInput.value) {
                     passwordGroup.classList.add('error');
                     passwordError.textContent = 'Este campo es obligatorio';
@@ -453,6 +562,7 @@
                     passwordError.style.display = 'none';
                 }
                 
+<<<<<<< HEAD
                 submitButton.disabled = !isValid || isSuspended;
                 return isValid;
             }
@@ -461,6 +571,18 @@
             emailInput.addEventListener('input', validateForm);
             passwordInput.addEventListener('input', validateForm);
 
+=======
+                // Habilitar/deshabilitar botón de envío
+                submitButton.disabled = !isValid;
+                return isValid;
+            }
+            
+            // Eventos de validación
+            emailInput.addEventListener('input', validateForm);
+            passwordInput.addEventListener('input', validateForm);
+            
+            // Mostrar/Ocultar contraseña
+>>>>>>> 468d358 (semafos2)
             togglePassword.addEventListener('click', function() {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
@@ -469,13 +591,19 @@
                 togglePassword.setAttribute('aria-label', 
                     type === 'password' ? 'Mostrar contraseña' : 'Ocultar contraseña');
             });
+<<<<<<< HEAD
 
+=======
+            
+            // Accesibilidad para toggle password con teclado
+>>>>>>> 468d358 (semafos2)
             togglePassword.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     this.click();
                 }
             });
+<<<<<<< HEAD
 
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -512,6 +640,38 @@
             checkSuspension();
 
             // Errores del servidor
+=======
+            
+            // Envío del formulario
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!validateForm()) {
+                    return;
+                }
+                
+                // Mostrar spinner y deshabilitar botón
+                loginSpinner.style.display = 'inline-block';
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="spinner"><i class="fas fa-spinner"></i></span> Procesando...';
+                
+                // Simulación de envío del formulario (reemplazar con AJAX real)
+                setTimeout(function() {
+                    // En un caso real, aquí irían las llamadas AJAX
+                    loginSpinner.style.display = 'none';
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Ingresar';
+                    
+                    // Ejemplo de respuesta exitosa
+                    showNotification('Cargando...');
+                    
+                    // Enviar el formulario realmente después de la simulación
+                    loginForm.submit();
+                }, 1500);
+            });
+            
+            // Si hay errores enviados desde el servidor (Laravel)
+>>>>>>> 468d358 (semafos2)
             @if ($errors->has('email'))
                 errorMessage.textContent = "{{ $errors->first('email') }}";
                 errorContainer.style.display = 'block';

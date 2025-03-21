@@ -165,6 +165,31 @@
             border-radius: 20px;
             font-size: 0.9rem;
         }
+<<<<<<< HEAD
+=======
+        .btn-custom {
+    background-color: #dc3545; /* Rojo Bootstrap */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-custom:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el mouse */
+    transform: scale(1.05);
+   }
+
+    .btn-custom:active {
+    background-color: #a71d2a; /* Rojo aún más oscuro al hacer clic */
+    transform: scale(0.95);
+  }
+
+>>>>>>> 468d358 (semafos2)
     </style>
 </head>
 <body>
@@ -176,7 +201,11 @@
         <nav>
             <ul class="sidebar-nav">
                 <li><a href="{{ route('admin.dashboard') }}" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+<<<<<<< HEAD
                 <li><a href="{{ route('admin.users.index') }}"><i class="fas fa-users"></i> Usuarios</a></li>
+=======
+                <li><a href="{{ route('admin.users.index') }}"><i class="fas fa-users"></i> Registros</a></li>
+>>>>>>> 468d358 (semafos2)
                 <li><a href="#"><i class="fas fa-clock"></i> Tiempos</a></li>
                 <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Alertas</a></li>
                 <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
@@ -187,7 +216,16 @@
     <main class="main-content">
         <div class="header-bar">
             <h1>Gestión de Semáforos</h1>
+<<<<<<< HEAD
             <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+=======
+            <form method="POST" action="{{ route('admin.logout') }}">
+                @csrf
+                <button type="submit" class="btn-custom btn-danger">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
+            </form>
+>>>>>>> 468d358 (semafos2)
         </div>
 
         <div class="dashboard-grid">
@@ -292,6 +330,7 @@
     </main>
 
     <script>
+<<<<<<< HEAD
         // Gráfico de flujo vehicular
         const trafficCtx = document.getElementById('trafficFlowChart').getContext('2d');
         new Chart(trafficCtx, {
@@ -317,6 +356,49 @@
                 }
             }
         });
+=======
+        // Supongamos que tienes los datos de la tabla en un array de objetos
+const datosTabla = [
+    { Id_semaforo_estu: 1, Numero_Cambios: 1500, Fecha: '2023-10-01', Hora: '06:00' },
+    { Id_semaforo_estu: 2, Numero_Cambios: 3200, Fecha: '2023-10-01', Hora: '09:00' },
+    { Id_semaforo_estu: 3, Numero_Cambios: 2800, Fecha: '2023-10-01', Hora: '12:00' },
+    { Id_semaforo_estu: 4, Numero_Cambios: 3400, Fecha: '2023-10-01', Hora: '15:00' },
+    { Id_semaforo_estu: 5, Numero_Cambios: 4200, Fecha: '2023-10-01', Hora: '18:00' },
+    { Id_semaforo_estu: 6, Numero_Cambios: 2300, Fecha: '2023-10-01', Hora: '21:00' }
+];
+
+// Extraer las horas y el número de cambios
+const labels = datosTabla.map(item => item.Hora);
+const data = datosTabla.map(item => item.Numero_Cambios);
+
+// Obtener el contexto del gráfico
+const trafficCtx = document.getElementById('trafficFlowChart').getContext('2d');
+
+// Crear el gráfico con los datos de la tabla
+new Chart(trafficCtx, {
+    type: 'line',
+    data: {
+        labels: labels, // Usar las horas como etiquetas
+        datasets: [{
+            label: 'Vehículos por hora',
+            data: data, // Usar el número de cambios como datos
+            borderColor: '#2c3e50',
+            backgroundColor: 'rgba(44, 62, 80, 0.1)',
+            tension: 0.4,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Flujo Vehicular Diario'
+            }
+        }
+    }
+});
+>>>>>>> 468d358 (semafos2)
 
         // Gráfico de actividad de usuarios
         const userCtx = document.getElementById('userActivityChart').getContext('2d');
